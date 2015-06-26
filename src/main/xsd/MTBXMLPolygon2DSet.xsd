@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+/*
+ * This file is part of MiToBo, the Microscope Image Analysis Toolbox.
+ *
+ * Copyright (C) 2010
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Fore more information on MiToBo, visit
+ *
+ *    http://www.informatik.uni-halle.de/mitobo/
+ *
+ */
+-->
+
+<xs:schema 
+   targetNamespace="http://informatik.unihalle.de/MiToBo_xml"
+   xmlns="http://informatik.unihalle.de/MiToBo_xml"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   elementFormDefault="qualified"
+   attributeFormDefault="unqualified"
+>
+
+<xs:import namespace="http://informatik.unihalle.de/MiToBo_xml"
+	schemaLocation="MTBXMLBase.xsd">
+</xs:import>
+
+<!-- add annotation/comments -->
+
+ <xs:complexType name="MTBXMLPolygon2DSetType">
+  <xs:sequence>
+   <xs:element name="xMin" type="xs:double"/>
+   <xs:element name="yMin" type="xs:double"/>
+   <xs:element name="xMax" type="xs:double"/>
+   <xs:element name="yMax" type="xs:double"/>
+   <xs:element name="polygon" type="MTBXMLPolygon2DType" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+  <xs:attribute name="version" type="xs:string"/>
+ </xs:complexType>
+
+ <xs:complexType name="MTBXMLPolygon2DType">
+  <xs:sequence>
+   <xs:element name="closed" type="xs:boolean"/>
+   <xs:element name="point" type="MTBXMLPoint2D.DoubleType" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="MTBXMLSnakeType">
+  <xs:complexContent>
+   <xs:extension base="MTBXMLPolygon2DType">
+    <xs:sequence>
+     <xs:element name="scaleFactor" type="xs:double"/>
+    </xs:sequence>
+   </xs:extension>
+  </xs:complexContent>
+ </xs:complexType>
+
+</xs:schema>

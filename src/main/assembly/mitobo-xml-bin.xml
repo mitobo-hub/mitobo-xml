@@ -1,0 +1,34 @@
+<assembly>
+  <id>bin</id>
+  <formats>
+<!--    <format>tar.gz</format>-->
+<!--    <format>tar.bz2</format>-->
+    <format>zip</format>
+  </formats>
+  <files>
+    <file>
+      <source>target/mitobo-xml-${project.version}.jar</source>
+      <outputDirectory>jars</outputDirectory>
+    </file>
+  </files>
+  <fileSets>
+    <fileSet>
+      <includes>
+        <include>LICENSE*</include>
+<!--        <include>NOTICE*</include>-->
+      </includes>
+    </fileSet>
+    <fileSet>
+      <!-- TODO: use expresssions instead: ${project.build.directory}, ${project.build.finalName} -->
+      <directory>target</directory>
+      <outputDirectory></outputDirectory>
+      <includes>
+        <include>*.jar</include>
+        <include>*-src.zip</include>
+      </includes>
+      <excludes>
+	<exclude>*-jar-with-dependencies.jar</exclude>
+      </excludes>
+    </fileSet>
+  </fileSets>
+</assembly>

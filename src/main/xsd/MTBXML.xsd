@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+ * This file is part of MiToBo, the Microscope Image Analysis Toolbox.
+ *
+ * Copyright (C) 2010
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Fore more information on MiToBo, visit
+ *
+ *    http://www.informatik.uni-halle.de/mitobo/
+ *
+ */
+-->
+
+<xs:schema 
+   targetNamespace="http://informatik.unihalle.de/MiToBo_xml"
+   xmlns="http://informatik.unihalle.de/MiToBo_xml"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   elementFormDefault="qualified"
+   attributeFormDefault="unqualified"
+>
+
+<xs:import namespace="http://informatik.unihalle.de/MiToBo_xml"
+	schemaLocation="MTBXMLPolygon2DSet.xsd">
+</xs:import>
+
+<xs:import namespace="http://informatik.unihalle.de/MiToBo_xml"
+	schemaLocation="MTBXMLContour2DSet.xsd">
+</xs:import>
+
+<xs:import namespace="http://informatik.unihalle.de/MiToBo_xml"
+	schemaLocation="MTBXMLRegion2DSet.xsd">
+</xs:import>
+
+<xs:import namespace="http://informatik.unihalle.de/MiToBo_xml"
+	schemaLocation="MTBXMLRegion2DSetBag.xsd">
+</xs:import>
+
+<xs:import namespace="http://informatik.unihalle.de/MiToBo_xml"
+	schemaLocation="MTBXMLRegion3DSet.xsd">
+</xs:import>
+
+<xs:import namespace="http://informatik.unihalle.de/MiToBo_xml"
+	schemaLocation="MTBXMLMultiStateMMIDVector.xsd">
+</xs:import>
+
+<!-- add annotation/comments -->
+
+<xs:element name="MTBXMLPolygon2DSet" type="MTBXMLPolygon2DSetType">
+</xs:element>
+
+<xs:element name="MTBXMLContour2DSet" type="MTBXMLContour2DSetType">
+</xs:element>
+
+<xs:element name="MTBXMLRegion2DSet" type="MTBXMLRegion2DSetType">
+</xs:element>
+
+<xs:element name="MTBXMLRegion2DSetBag" type="MTBXMLRegion2DSetBagType">
+</xs:element>
+
+<xs:element name="MTBXMLRegion3DSet" type="MTBXMLRegion3DSetType">
+</xs:element>
+
+<xs:element name="MTBXMLMultiStateMMIDVector" type="MTBXMLMultiStateMMIDVectorType">
+</xs:element>
+
+</xs:schema>

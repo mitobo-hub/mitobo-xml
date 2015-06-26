@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+/*
+ * This file is part of MiToBo, the Microscope Image Analysis Toolbox.
+ *
+ * Copyright (C) 2010
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Fore more information on MiToBo, visit
+ *
+ *    http://www.informatik.uni-halle.de/mitobo/
+ *
+ */
+-->
+
+<xs:schema 
+   targetNamespace="http://graphml.graphdrawing.org/xmlns"
+   xmlns="http://graphml.graphdrawing.org/xmlns"  
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   elementFormDefault="qualified"
+   attributeFormDefault="unqualified"
+>
+
+<xs:redefine schemaLocation="http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+   <xs:complexType name="data-extension.type" mixed="true">
+      <xs:complexContent>
+         <xs:extension base="data-extension.type"> 
+            <xs:sequence>
+              <xs:element name="properties" type="PropertyListType" minOccurs="0" maxOccurs="1"/>
+              <xs:element name="xmlHistory" type="XmlHistoryType" minOccurs="0" maxOccurs="1"/>
+              <xs:element name="parameterWrapper" type="ParameterWrapperType" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+</xs:redefine>
+
+ <xs:complexType name="PropertyListType">
+  <xs:sequence>
+   <xs:element name="property" type="PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="PropertyType">
+  <xs:sequence>
+   <xs:element name="key" type="xs:string"/>
+   <xs:element name="value" type="xs:string"/>
+  </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="XmlHistoryType">
+  <xs:sequence>
+   <xs:any processContents="lax"/>
+  </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="ParameterWrapperType">
+  <xs:sequence>
+   <xs:any processContents="lax"/>
+  </xs:sequence>
+ </xs:complexType>
+
+</xs:schema>

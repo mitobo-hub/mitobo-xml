@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+/*
+ * This file is part of MiToBo, the Microscope Image Analysis Toolbox.
+ *
+ * Copyright (C) 2012
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Fore more information on MiToBo, visit
+ *
+ *    http://www.informatik.uni-halle.de/mitobo/
+ *
+ */
+-->
+
+<xs:schema 
+   targetNamespace="http://informatik.unihalle.de/MiToBo_xml"
+   xmlns="http://informatik.unihalle.de/MiToBo_xml"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   elementFormDefault="qualified"
+   attributeFormDefault="unqualified"
+>
+
+<xs:import namespace="http://informatik.unihalle.de/MiToBo_xml"
+        schemaLocation="MTBXMLBase.xsd">
+</xs:import>
+
+
+ <xs:complexType name="MTBXMLRegion3DSetType">
+  <xs:sequence>
+   <xs:element name="xMin" type="xs:double"/>
+   <xs:element name="yMin" type="xs:double"/>
+   <xs:element name="zMin" type="xs:double"/>
+   <xs:element name="xMax" type="xs:double"/>
+   <xs:element name="yMax" type="xs:double"/>
+   <xs:element name="zMax" type="xs:double"/>
+   <xs:element name="regions" type="MTBXMLRegion3DType" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="MTBXMLRegion3DType">
+  <xs:sequence>
+   <xs:element name="id" type="xs:int"/>
+   <xs:element name="centroid" type="MTBXMLPoint3DType"/>
+   <xs:element name="volume" type="xs:int"/>
+   <xs:element name="points" type="MTBXMLPoint3DVectorType" minOccurs="1" maxOccurs="1"/>
+  </xs:sequence>
+ </xs:complexType>
+
+</xs:schema>

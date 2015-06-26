@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+/*
+ * This file is part of MiToBo, the Microscope Image Analysis Toolbox.
+ *
+ * Copyright (C) 2010
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Fore more information on MiToBo, visit
+ *
+ *    http://www.informatik.uni-halle.de/mitobo/
+ *
+ */
+-->
+
+<xs:schema 
+   targetNamespace="http://informatik.unihalle.de/MiToBo_xml"
+   xmlns="http://informatik.unihalle.de/MiToBo_xml"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   elementFormDefault="qualified"
+   attributeFormDefault="unqualified"
+>
+
+<!-- add annotation/comments -->
+<!-- use a base mitobo schema, e.g. for Point2D, wich is included -->
+
+ <xs:complexType name="MTBXMLPoint2D.DoubleType">
+  <xs:sequence>
+   <xs:element name="x" type="xs:double"/>
+   <xs:element name="y" type="xs:double"/>
+  </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="MTBXMLPoint2DType">
+  <xs:sequence>
+   <xs:element name="x" type="xs:int"/>
+   <xs:element name="y" type="xs:int"/>
+  </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="MTBXMLPointVectorType">
+  <xs:sequence>
+   <xs:element name="point" type="MTBXMLPoint2D.DoubleType" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+ </xs:complexType>
+ 
+  <xs:complexType name="MTBXMLPoint3DType">
+  <xs:sequence>
+   <xs:element name="x" type="xs:double"/>
+   <xs:element name="y" type="xs:double"/>
+   <xs:element name="z" type="xs:double"/>
+  </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="MTBXMLPoint3DVectorType">
+  <xs:sequence>
+   <xs:element name="point" type="MTBXMLPoint3DType" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+ </xs:complexType>
+ 
+ <xs:complexType name="MTBXMLMatrixType">
+  <xs:sequence>
+   <xs:element name="numRows" type="xs:int"/>
+   <xs:element name="numColumns" type="xs:int"/>
+   <xs:element name="matrixElements" type="xs:double" minOccurs="1" maxOccurs="unbounded"/>
+  </xs:sequence>
+ </xs:complexType>
+
+  <xs:complexType name="MTBXMLAWTColor">
+  <xs:sequence>
+   <xs:element name="red" type="xs:int"/>
+   <xs:element name="green" type="xs:int"/>
+   <xs:element name="blue" type="xs:int"/>
+   <xs:element name="alpha" type="xs:int"/>
+  </xs:sequence>
+ </xs:complexType>
+
+</xs:schema>
