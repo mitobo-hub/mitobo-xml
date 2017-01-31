@@ -36,6 +36,9 @@
 
 <!-- add annotation/comments -->
 
+<xs:element name="MTBXMLRootSet" type="MTBXMLRootSetType">
+</xs:element>
+
  <xs:complexType name="MTBXMLRootSetType">
   <xs:sequence>
    <xs:element name="roots" type="MTBXMLRootType" minOccurs="0" maxOccurs="unbounded"/>
