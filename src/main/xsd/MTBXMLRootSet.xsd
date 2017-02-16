@@ -34,16 +34,116 @@
    attributeFormDefault="unqualified"
 >
 
-<!-- add annotation/comments -->
+<!-- 
+MTBXMLRootProject	# a set of root annotations for different images typically 
+			# constituting an experiment,  e.g. a series of time points of one tube
 
-<xs:element name="MTBXMLRootSet" type="MTBXMLRootSetType">
-</xs:element>
+        version: integer 
+	xsize: integer
+	ysize: integer
+	xresolution: float	# spatial horizontal resolution in dpi
+	yresolution: float      # spatial vertical resolution in dpi
+
+	# TODO
+	##key,value list
+
+	rootsets: set of MTBXMLRootSet
+	rootAssociations: set of MTBXMLRootAssociation 
+		# set of root associations identifying roots from different
+		# root sets as representing the same pyhsical root
+
+MTBXMLRootSet # annotated roots of one image
+        version: integer 
+        rootSetID: integer	# need to be unique within a MTBXMLRootProject
+                        # used to reference to associate roots of different images
+			# does not contain other information and need not
+			# be retainen when converting to/from other data structure 
+	imagename: string # 
+	roots: set of MTBXMLRoot
+
+MTBXMLRoot   # one root made up of segments building a tree
+        rootID: integer	# need to be unique within a MTBXMLRootSet
+                        # used to reference to associate roots of different images
+			# does not contain other information and need not
+			# be retainen when converting to/from other data structure 
+
+	startSegmentId: integer # Id of the first RootSegment of this Root; may be negative to indicate an "empty" root
+	rootSegments: set of MTBXMLRootSegment
+
+	#additional key,value list?
+
+MTBXMLRootAssociation   # associate roots from different roots sets as representing
+			# the same pyhsical root
+	rootReferences: set of MTBXMLRootReference
+
+MTBXMLRootReference    # refers to one root in one root set
+	rootSetID: integer
+        rootId: integer
+
+MTBXMLRootSegment # one straight segment of a root,
+		# geometrically the segment is define by a straight center segment
+		# and radii at both end points of the center segment
+		#
+		# these radii define straight segments perpendicular to the center segment
+		# at the end points twice length of the corresponding radius; 
+                # the endpoints of these segments in turn define the corners of the 
+		# root segment rectangle
+
+	segmentId: integer # needs to be unique within a MTBXMLRoot
+                           # used to define the tree structure of root segments
+			   # does not contain other information and need not
+			   # be retainen when converting to/from other data structure 
+                           
+	rootId: interger   # Id of the root this segment is part of
+	parentId: integer
+			# each rootsegment's startpoint has
+			# either the Id of one parent root segment or negative 
+			# if segment is the root/first segment of the tree
+	startPoint: MTBXMLRootSegmentPoint
+	endPoint: MTBXMLRootSegmentPoint
+			# these points define the straight center line segment
+			# where the startPoint is connected to a typically identical
+			# endPoint of its parent segment
+	startRadius: float
+	endRadius: float
+
+
+	#additional properties
+	type:  #living, dead, decayed, gap 
+	score: float #
+
+
+MTBXMLRootSegmentPoint # a 2D point
+	x	float
+	y 	float
+-->
+
+
+
+ <!-- to create a Document-->
+ <xs:element name="MTBXMLRootProject" type="MTBXMLRootProjectType">
+ </xs:element>
+
+ <!-- types-->
+ <xs:complexType name="MTBXMLRootProjectType">
+  <xs:sequence>
+   <xs:element name="version" type="xs:string" fixed="1"/>
+   <xs:element name="xsize" type="xs:int"/>
+   <xs:element name="ysize" type="xs:int"/>
+   <xs:element name="xresolution" type="xs:float"/>
+   <xs:element name="yresolution" type="xs:float"/>
+   <xs:element name="rootsets" type="MTBXMLRootSetType" minOccurs="0" maxOccurs="unbounded"/>
+   <xs:element name="rootAssociations" type="MTBXMLRootAssociationType" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+ </xs:complexType>
 
  <xs:complexType name="MTBXMLRootSetType">
   <xs:sequence>
+   <xs:element name="version" type="xs:int" fixed="1"/>
+   <xs:element name="rootSetID" type="xs:int"/>
+   <xs:element name="imagename" type="xs:string"/>
    <xs:element name="roots" type="MTBXMLRootType" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
-  <xs:attribute name="version" type="xs:string"/>
  </xs:complexType>
 
  <xs:complexType name="MTBXMLRootType">
@@ -61,7 +161,7 @@
    <xs:element name="parentID" type="xs:integer"/>
    <xs:element name="startPoint" type="MTBXMLRootSegmentPointType"/>
    <xs:element name="endPoint" type="MTBXMLRootSegmentPointType"/>
-   <xs:element name="endRadius" type="xs:float"/>
+   <xs:element name="startRadius" type="xs:float"/>
    <xs:element name="endRadius" type="xs:float"/>
    <xs:element name="type" type="MTBXMLRootSegmentStatusType"/>
    <xs:element name="score" type="xs:float"/>
@@ -75,13 +175,26 @@
   </xs:sequence>
  </xs:complexType>
 
-<xs:simpleType name="MTBXMLRootSegmentStatusType">
+ <xs:simpleType name="MTBXMLRootSegmentStatusType">
   <xs:restriction base="xs:string">
     <xs:enumeration value="LIVING" />
     <xs:enumeration value="DEAD" />
     <xs:enumeration value="DECAYED" />
     <xs:enumeration value="GAP" />
   </xs:restriction>
-</xs:simpleType>
+ </xs:simpleType>
+
+ <xs:complexType name="MTBXMLRootAssociationType">
+  <xs:sequence>
+   <xs:element name="rootReferences" type="MTBXMLRootReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="MTBXMLRootReferenceType">
+  <xs:sequence>
+   <xs:element name="rootSetID" type="xs:integer"/>
+   <xs:element name="rootID" type="xs:integer"/>
+  </xs:sequence>
+ </xs:complexType>
 
 </xs:schema>
