@@ -148,17 +148,17 @@ MTBXMLRootSegmentPoint # a 2D point
 
  <xs:complexType name="MTBXMLRootType">
   <xs:sequence>
-   <xs:element name="rootID" type="xs:integer"/>
-   <xs:element name="startID" type="xs:integer"/>
+   <xs:element name="rootID" type="xs:int"/>
+   <xs:element name="startID" type="xs:int"/>
    <xs:element name="rootSegments" type="MTBXMLRootSegmentType" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
  </xs:complexType>
 
  <xs:complexType name="MTBXMLRootSegmentType">
   <xs:sequence>
-   <xs:element name="segmentID" type="xs:integer"/>
-   <xs:element name="rootID" type="xs:integer"/>
-   <xs:element name="parentID" type="xs:integer"/>
+   <xs:element name="segmentID" type="xs:int"/>
+   <xs:element name="rootID" type="xs:int"/>
+   <xs:element name="parentID" type="xs:int"/>
    <xs:element name="startPoint" type="MTBXMLRootSegmentPointType"/>
    <xs:element name="endPoint" type="MTBXMLRootSegmentPointType"/>
    <xs:element name="startRadius" type="xs:float"/>
@@ -192,8 +192,8 @@ MTBXMLRootSegmentPoint # a 2D point
 
  <xs:complexType name="MTBXMLRootReferenceType">
   <xs:sequence>
-   <xs:element name="rootSetID" type="xs:integer"/>
-   <xs:element name="rootID" type="xs:integer"/>
+   <xs:element name="rootSetID" type="xs:int"/>
+   <xs:element name="rootID" type="xs:int"/>
   </xs:sequence>
  </xs:complexType>
 
