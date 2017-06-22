@@ -38,47 +38,36 @@
 MTBXMLRootProject	# a set of root annotations for different images typically 
 			# constituting an experiment,  e.g. a series of time points of one tube
 
-        version: integer 
-	xsize: integer
-	ysize: integer
-	xresolution: float	# spatial horizontal resolution in dpi
-	yresolution: float      # spatial vertical resolution in dpi
+        version: string # version of the xml schema
+	xsize: integer   # number of pixels horizontally for all images of this experiment
+	ysize: integer   # number of pixels vertically for all images of this experiment
+	xresolution: float	# spatial horizontal resolution in dpi of all images of this experiment
+	yresolution: float      # spatial vertical resolution in dpi of all images of this experiment
 
-	# TODO
-	##key,value list
-
-	rootsets: set of MTBXMLRootSet
+	collectionOfImageAnnotations: set of MTBXMLRootImageAnnotation
+		# the collection of MTBXMLRootImageAnnotation, one for each image of the expermiment
 	rootAssociations: set of MTBXMLRootAssociation 
 		# set of root associations identifying roots from different
-		# root sets as representing the same pyhsical root
+		# images as representing the same pyhsical root
 
-MTBXMLRootSet # annotated roots of one image
-        version: integer 
+MTBXMLRootImageAnnotation # set of annotated roots for one image
         rootSetID: integer	# need to be unique within a MTBXMLRootProject
-                        # used to reference to associate roots of different images
+                        # used to associate roots of different images
 			# does not contain other information and need not
-			# be retainen when converting to/from other data structure 
+			# be retained when converting to/from other data structure 
 	imagename: string # 
-	roots: set of MTBXMLRoot
+	roots: set of MTBXMLRoot # the set of annotated roots for this image 
 
 MTBXMLRoot   # one root made up of segments building a tree
-        rootID: integer	# need to be unique within a MTBXMLRootSet
+        rootID: integer	# need to be unique within a MTBXMLRootImageAnnotation
                         # used to reference to associate roots of different images
 			# does not contain other information and need not
-			# be retainen when converting to/from other data structure 
+			# be retained when converting to/from other data structure 
 
 	startSegmentId: integer # Id of the first RootSegment of this Root; may be negative to indicate an "empty" root
 	rootSegments: set of MTBXMLRootSegment
 
-	#additional key,value list?
-
-MTBXMLRootAssociation   # associate roots from different roots sets as representing
-			# the same pyhsical root
-	rootReferences: set of MTBXMLRootReference
-
-MTBXMLRootReference    # refers to one root in one root set
-	rootSetID: integer
-        rootId: integer
+	isCompletleyReconstructedFromWhinRhizotron: boolean # indicated ith this root has been completely reconstructed from an WInRhitoTron pattern file
 
 MTBXMLRootSegment # one straight segment of a root,
 		# geometrically the segment is define by a straight center segment
@@ -104,18 +93,32 @@ MTBXMLRootSegment # one straight segment of a root,
 			# these points define the straight center line segment
 			# where the startPoint is connected to a typically identical
 			# endPoint of its parent segment
-	startRadius: float
-	endRadius: float
-
+	startRadius: float  # half width of the segment at the start point
+	endRadius: float  # half width of the segment at the end point
 
 	#additional properties
-	type:  #living, dead, decayed, gap 
+	type:  MTBXMLRootSegmentStatus
 	score: float #
-
 
 MTBXMLRootSegmentPoint # a 2D point
 	x	float
 	y 	float
+
+MTBXMLRootSegmentStatus  # status of a root segment
+    "LIVING" 
+    "DEAD" 
+    "DECAYED"
+    "GAP"	# this segment is not visible in the image but infered for complete topology of roots
+
+
+MTBXMLRootAssociation   # associate roots from different images as representing the same pyhsical root
+			# not more than one root of each image (i.e. MTBXMLRootImageAnnotation) may be part of one association
+	rootReferences: set of MTBXMLRootReference
+
+MTBXMLRootReference    # refers to one root in one image
+	rootSetID: integer
+        rootId: integer
+
 -->
 
 
@@ -132,14 +135,13 @@ MTBXMLRootSegmentPoint # a 2D point
    <xs:element name="ysize" type="xs:int"/>
    <xs:element name="xresolution" type="xs:float"/>
    <xs:element name="yresolution" type="xs:float"/>
-   <xs:element name="rootsets" type="MTBXMLRootSetType" minOccurs="0" maxOccurs="unbounded"/>
+   <xs:element name="collectionOfImageAnnotations" type="MTBXMLRootImageAnnotationType" minOccurs="0" maxOccurs="unbounded"/>
    <xs:element name="rootAssociations" type="MTBXMLRootAssociationType" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
  </xs:complexType>
 
- <xs:complexType name="MTBXMLRootSetType">
+ <xs:complexType name="MTBXMLRootImageAnnotationType">
   <xs:sequence>
-   <xs:element name="version" type="xs:int" fixed="1"/>
    <xs:element name="rootSetID" type="xs:int"/>
    <xs:element name="imagename" type="xs:string"/>
    <xs:element name="roots" type="MTBXMLRootType" minOccurs="0" maxOccurs="unbounded"/>
@@ -149,8 +151,9 @@ MTBXMLRootSegmentPoint # a 2D point
  <xs:complexType name="MTBXMLRootType">
   <xs:sequence>
    <xs:element name="rootID" type="xs:int"/>
-   <xs:element name="startID" type="xs:int"/>
+   <xs:element name="startSegmentID" type="xs:int"/>
    <xs:element name="rootSegments" type="MTBXMLRootSegmentType" minOccurs="0" maxOccurs="unbounded"/>
+   <xs:element name="isCompletleyReconstructedFromWhinRhizotron" type="xs:boolean"/>
   </xs:sequence>
  </xs:complexType>
 
