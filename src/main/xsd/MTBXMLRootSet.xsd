@@ -55,7 +55,8 @@ MTBXMLRootImageAnnotation # set of annotated roots for one image
                         # used to associate roots of different images
 			# does not contain other information and need not
 			# be retained when converting to/from other data structure 
-	imagename: string # 
+	imagename: string # filename of minirhizotron image (without path) or
+				filename of patternfile if image file is unknown
 	roots: set of MTBXMLRoot # the set of annotated roots for this image 
 
 MTBXMLRoot   # one root made up of segments building a tree
@@ -98,7 +99,7 @@ MTBXMLRootSegment # one straight segment of a root,
 
 	#additional properties
 	type:  MTBXMLRootSegmentStatus
-	score: float #
+	score: float # not used currently
 
 MTBXMLRootSegmentPoint # a 2D point
 	x	float
