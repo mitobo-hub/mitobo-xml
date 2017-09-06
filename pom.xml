@@ -51,14 +51,14 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <YEAR>2014</YEAR>
+    <YEAR>2017</YEAR>
   </properties>
 
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>2.4.3</version>
+        <version>3.0.2</version>
 	<configuration>
 	  <delimiters>
 	    <delimiter>${*}</delimiter>  <!-- to keep the default behavior -->
@@ -69,18 +69,18 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>2.4</version>
+        <version>3.0.2</version>
       </plugin>
       <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-site-plugin</artifactId>
-	<version>3.0-beta-3</version>
+	<version>3.6</version>
       </plugin>
       <plugin>
 	<!-- package binaries and sources into zip files;
 	     Attention: here we use our own assembly descriptors! -->
 	<artifactId>maven-assembly-plugin</artifactId>
-	<version>2.2</version>
+	<version>3.1.0</version>
 	<configuration>
 	  <descriptors>
 	    <descriptor>src/main/assembly/mitobo-xml-bin.xml</descriptor>
@@ -101,7 +101,7 @@
 	<!-- package javadocs -->
 	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-javadoc-plugin</artifactId>
-	<version>2.1</version>
+	<version>2.10.4</version>
 	<executions>
 	  <execution>
 	    <id>attach-javadocs</id>
@@ -154,7 +154,7 @@
       <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9.1</version>
+        <version>2.10.4</version>
       </plugin>
     </plugins>
   </reporting>
@@ -179,18 +179,6 @@
       <layout>default</layout>
     </repository>
     <repository>
-      <id>snapshots</id>
-      <name>Archiva Snapshot Repository on 'moon'</name>
-      <url>https://moon.informatik.uni-halle.de/archiva/repository/snapshots/</url>
-      <layout>default</layout>
-    </repository>
-    <repository>
-      <id>internal</id>
-      <name>Archiva Internal Repository on 'moon'</name>
-      <url>https://moon.informatik.uni-halle.de/archiva/repository/internal/</url>
-      <layout>default</layout>
-    </repository>
-    <repository>
       <id>releases</id>
       <name>Archiva Release Repository on 'moon'</name>
       <url>https://moon.informatik.uni-halle.de/archiva/repository/releases/</url>
@@ -203,45 +191,27 @@
     <dependency>
       <groupId>org.apache.xmlbeans</groupId>
       <artifactId>xmlbeans</artifactId>
-      <version>2.4.0</version>
+      <version>2.6.0</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
 
   <scm>
-    <connection>scm:git:https://trac.informatik.uni-halle.de/git/mitoboGit</connection>
-    <developerConnection>scm:git:https://trac.informatik.uni-halle.de/git/mitoboGit</developerConnection>
+    <connection>scm:git:https://github.com/mitobo-hub/mitobo-xml.git</connection>
+    <developerConnection>scm:git:https://github.com/mitobo-hub/mitobo-xml.git</developerConnection>
   </scm>
 
   <profiles>
     <profile>
-      <id>deploy-internal</id>
+      <id>deploy-all</id>
       <activation>
 	<activeByDefault>true</activeByDefault>
       </activation>
       <distributionManagement>
 	<snapshotRepository>
-	  <id>snapshots</id>
-	  <name>Archiva Snapshot Repository on 'moon'</name>
-	  <url>https://moon.informatik.uni-halle.de/archiva/repository/snapshots/</url>
-	</snapshotRepository>
-	<repository>
-	  <id>internal</id>
-	  <name>Archiva Internal Repository on 'moon'</name>
-	  <url>https://moon.informatik.uni-halle.de/archiva/repository/internal/</url>
-	</repository>
-      </distributionManagement>
-    </profile>
-    <profile>
-      <id>deploy-release</id>
-      <activation>
-	<activeByDefault>false</activeByDefault>
-      </activation>
-      <distributionManagement>
-	<snapshotRepository>
-	  <id>snapshots</id>
-	  <name>Archiva Snapshot Repository on 'moon'</name>
-	  <url>https://moon.informatik.uni-halle.de/archiva/repository/snapshots/</url>
+	  <id>snapshots-pub</id>
+	  <name>Archiva Public Snapshot Repository on 'moon'</name>
+	  <url>https://moon.informatik.uni-halle.de/archiva/repository/snapshots-pub/</url>
 	</snapshotRepository>
 	<repository>
 	  <id>releases</id>
@@ -253,8 +223,8 @@
   </profiles> 
 
   <issueManagement>
-    <system>MantisBT</system>
-    <url>http://www2.informatik.uni-halle.de/agprbio/mitobo-bts/main_page.php</url>
+    <system>Github Issue Tracking</system>
+    <url>https://github.com/mitobo-hub/mitobo-xml/issues</url>
   </issueManagement>
 
 </project>
