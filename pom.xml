@@ -12,17 +12,11 @@
   <url>http://www.informatik.uni-halle.de/mitobo</url>
   <inceptionYear>2014</inceptionYear>
 
-  <licenses>
-    <license>
-      <name>GNU General Public License version 3.0</name>
-      <url>http://www.gnu.org/licenses/gpl-3.0.html</url>
-    </license>
-  </licenses>
-
-  <organization>
-    <name>Martin Luther University Halle-Wittenberg</name>
-    <url>http://www.uni-halle.de</url>
-  </organization>
+  <parent>
+    <groupId>de.unihalle.informatik.MiToBo</groupId>
+    <artifactId>mitobo-pom</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
 
   <developers>
     <developer>
@@ -49,16 +43,12 @@
     </developer>
   </developers>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <YEAR>2017</YEAR>
-  </properties>
-
   <build>
     <plugins>
+
       <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>3.0.2</version>
 	<configuration>
 	  <delimiters>
 	    <delimiter>${*}</delimiter>  <!-- to keep the default behavior -->
@@ -66,21 +56,21 @@
 	  </delimiters>
 	</configuration>
       </plugin>
+      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.0.2</version>
       </plugin>
+      
       <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-site-plugin</artifactId>
-	<version>3.6</version>
       </plugin>
+      
       <plugin>
 	<!-- package binaries and sources into zip files;
 	     Attention: here we use our own assembly descriptors! -->
 	<artifactId>maven-assembly-plugin</artifactId>
-	<version>3.1.0</version>
 	<configuration>
 	  <descriptors>
 	    <descriptor>src/main/assembly/mitobo-xml-bin.xml</descriptor>
@@ -97,24 +87,16 @@
 	  </execution>
 	</executions>
       </plugin>
+      
       <plugin>
 	<!-- package javadocs -->
 	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-javadoc-plugin</artifactId>
-	<version>2.10.4</version>
-	<executions>
-	  <execution>
-	    <id>attach-javadocs</id>
-	    <goals>
-	      <goal>jar</goal>
-	    </goals>
-	  </execution>
-	</executions>
       </plugin>
+      
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>xmlbeans-maven-plugin</artifactId>
-        <version>2.3.3</version>
         <executions>
           <execution>
             <goals>
@@ -124,8 +106,8 @@
         </executions>
         <inherited>true</inherited>
         <configuration>
-           <schemaDirectory>src/main/xsd</schemaDirectory>
-           <download>true</download>
+          <schemaDirectory>src/main/xsd</schemaDirectory>
+          <download>true</download>
         </configuration>
       </plugin>
     </plugins>
@@ -154,44 +136,15 @@
       <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.4</version>
       </plugin>
     </plugins>
   </reporting>
-
-
-  <repositories>
-    <repository>
-      <id>jboss</id>
-      <name>JBoss Thirdparty Releases</name>
-      <url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases</url>
-      <layout>default</layout>
-    </repository>
-    <repository>
-      <id>central</id>
-      <name>Maven Central Repository</name>
-      <url>http://repo1.maven.org/maven2</url>
-    </repository>
-    <repository>
-      <id>net.imagej</id>
-      <name>ImageJ Repository for Maven</name>
-      <url>http://maven.imagej.net:8081/content/repositories/releases/</url>
-      <layout>default</layout>
-    </repository>
-    <repository>
-      <id>releases</id>
-      <name>Archiva Release Repository on 'moon'</name>
-      <url>https://moon.informatik.uni-halle.de/archiva/repository/releases/</url>
-      <layout>default</layout>
-    </repository>
-  </repositories>
 
   <dependencies>
     <!-- Compile dependencies -->
     <dependency>
       <groupId>org.apache.xmlbeans</groupId>
       <artifactId>xmlbeans</artifactId>
-      <version>2.6.0</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
@@ -200,27 +153,6 @@
     <connection>scm:git:https://github.com/mitobo-hub/mitobo-xml.git</connection>
     <developerConnection>scm:git:https://github.com/mitobo-hub/mitobo-xml.git</developerConnection>
   </scm>
-
-  <profiles>
-    <profile>
-      <id>deploy-all</id>
-      <activation>
-	<activeByDefault>true</activeByDefault>
-      </activation>
-      <distributionManagement>
-	<snapshotRepository>
-	  <id>snapshots-pub</id>
-	  <name>Archiva Public Snapshot Repository on 'moon'</name>
-	  <url>https://moon.informatik.uni-halle.de/archiva/repository/snapshots-pub/</url>
-	</snapshotRepository>
-	<repository>
-	  <id>releases</id>
-	  <name>Archiva Release Repository on 'moon'</name>
-	  <url>https://moon.informatik.uni-halle.de/archiva/repository/releases/</url>
-	</repository>
-      </distributionManagement>
-    </profile>
-  </profiles> 
 
   <issueManagement>
     <system>Github Issue Tracking</system>
