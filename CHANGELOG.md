@@ -14,6 +14,13 @@ The format of the file is based on a template from [Keep a Changelog](http://kee
 
 ### Fixed
 
+## [2.2] - 2018-03-23
+Birgit Moeller - <birgit.moeller@informatik.uni-halle.de>
+- Released MiToBo XML 2.2
+
+### Changed
+- switched to MiToBo parent POM file
+
 ## [2.1] - 2017-09-06
 Birgit Moeller - <birgit.moeller@informatik.uni-halle.de>
 - Released MiToBo XML 2.1
