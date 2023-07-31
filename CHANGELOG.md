@@ -10,6 +10,12 @@ The format of the file is based on a template from [Keep a Changelog](http://kee
 ### Removed
 ### Fixed
 
+## [3.2] - 2023-07-31
+Birgit Moeller - <birgit.moeller@informatik.uni-halle.de>
+- Released MiToBo XML 3.2
+### Fixed
+- fixed Archiva repository URLs
+
 ## [3.1] - 2021-04-09
 Birgit Moeller - <birgit.moeller@informatik.uni-halle.de>
 - Released MiToBo XML 3.1
@@ -80,4 +86,4 @@ Birgit Moeller - <birgit.moeller@informatik.uni-halle.de>
 ### Added
 - new XML data structures for representing minirhizotron image annotation data
 ### Changed
-- Updated several Maven plugins
+- updated several Maven plugins
